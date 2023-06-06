@@ -11,6 +11,8 @@
     <!-- custom css file link  -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link href="assets/image/logo.png" rel="icon">
+
 	<style>
 	.error-notice {
 	  margin: 5px 5px; /* Making sure to keep some distance from all side */

@@ -10,8 +10,7 @@
     <div class="row">
 	
         <div class="image">
-            <img src="assets/image/logo.png" alt="">
-			<center><h4>Patient Record Management System</h4></center>
+            <img src="assets/image/healthpoint.jpg" width="200px" alt="">
         </div>
 		
         <form action="controller/auth.php" method="post">
@@ -32,6 +31,8 @@
             </div>
          
             <input type="submit" class="btn" name="login" value="submit">
+			<br><br>
+			NO ACCOUNT ? REGISTER <a href="register"> HERE </a>
         </form>
 
     </div>
