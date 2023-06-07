@@ -18,7 +18,7 @@
             <ul class="nav navbar-nav float-right">
           
 
-              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="avatar avatar-online"><img src="../assets/images/default.jpg" alt="avatar"><i></i></span></a>
+              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="avatar avatar-online"><img src="../assets/image/default.jpg" alt="avatar"><i></i></span></a>
                 <div class="dropdown-menu dropdown-menu-right">
 				<a class="dropdown-item" href="profile">
 				<i class="ft-user"></i>  Profile</a>

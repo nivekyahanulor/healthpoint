@@ -23,6 +23,9 @@
 			<li class="nav-item">
 			  <a class="nav-link  <?php if($_GET['data'] == 'done'){ echo 'active'; } ?>"  href="appointments?data=done">Done Appointments</a>
 			</li>
+			<li class="nav-item">
+			  <a class="nav-link  <?php if($_GET['data'] == 'declined'){ echo 'active'; } ?>"  href="appointments?data=declined">Declined Appointments</a>
+			</li>
 		  </ul>
 			<div class="row">
 				<div class="col-12">
@@ -49,19 +52,83 @@
 											<th class="text-center">Doctors Name</th>
 											<th class="text-center">Date</th>
 											<th class="text-center">Time</th>
+											<?php if($_GET['data'] != 'declined'){?>
 											<th class="text-center">Status</th>
+											<th class="text-center">Action</th>
+											<?php } ?>
+											
+
 										</tr>
 									</thead>
 									<tbody>
 									<?php while($val = $is_appointments->fetch_object()){ ?>
 										<tr>
 											<td class="text-center"><?php echo $val->p_fname . ' '. $val->p_lastname;?></td>
-											<td class="text-center">Dr<?php echo $val->d_fname . ' '. $val->d_lname;?></td>
+											<td class="text-center">Dr. <?php echo $val->d_fname . ' '. $val->d_lname;?></td>
 											<td class="text-center"><?php echo $val->appointment_date;?></td>
 											<td class="text-center"><?php echo $val->appointment_time;?></td>
+											<?php if($_GET['data'] != 'declined'){?>
 											<td class="text-center"><?php if( $val->status == 0) { echo "Pending";} else { echo '<a href="#" data-toggle="modal" data-backdrop="false" data-target="#results'.$val->appointment_id.'" class="btn round btn-outline-info btn-sm"> <i class="la la-check"></i> View Results </a>';} ?></td>
-											
+											<td class="text-center">
+											<?php  if($val->status == 0){?>
+												<button class="btn btn-sm round btn-outline-info" data-toggle="modal" data-target="#approved<?php echo $val->appointment_id;?>"> Approve </button>
+												<button class="btn btn-sm round btn-outline-warning" data-toggle="modal" data-target="#decline<?php echo $val->appointment_id;?>"> Decline </button>
+											<?php }  else { echo '<a href="patient-profile?data='.$val->patient_id.'&appointment='.$val->appointment_id.'" class="btn round btn-outline-info btn-sm"> <i class="la la-check"></i> View Patient Record </a>';}?>
+											</td>
+											<?php } ?>
 										</tr>
+										<div class="modal fade text-left" id="approved<?php echo $val->appointment_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" style="display: none;" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabel4">Appointment Request</h4>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="oewei8">
+														<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<form method="POST">
+														<div class="form-group">
+														
+															<b>Are you sure to approved this appointment request ?</b>
+													    	<input type="hidden" name="appointment_id" value="<?php echo $val->appointment_id;?>">
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" fdprocessedid="pu6p1c">Close</button>
+														<button type="submit" class="btn btn-outline-success" name="process-approval">Approved</button>
+													</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										
+										<div class="modal fade text-left" id="decline<?php echo $val->appointment_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" style="display: none;" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabel4">Appointment Request</h4>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="oewei8">
+														<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<form method="POST">
+														<div class="form-group">
+														
+															<b>Are you sure to decline this appointment request ?</b>
+													    	<input type="hidden" name="appointment_id" value="<?php echo $val->appointment_id;?>">
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" fdprocessedid="pu6p1c">Close</button>
+														<button type="submit" class="btn btn-outline-warning" name="process-declined">Declined</button>
+													</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										
 										<div class="modal fade text-left" id="results<?php echo $val->appointment_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" style="display: none;" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
@@ -147,8 +214,8 @@
 			</div>
 			<div class="form-group">
 				<label for="companyName">Doctors Name: </label>
-				<select  class="form-control" name="doctor_id" required>
-					<option value=""> - Select Patient - </option>
+				<select  class="form-control" name="doctor_id" id="doctor_id" required>
+					<option value=""> - Select Doctor - </option>
 						<?php
 						$is_doctors = $mysqli->query("SELECT * from is_doctors");
 						while($val = $is_doctors->fetch_object()){
@@ -159,17 +226,30 @@
 			</div>
 			<div class="form-group">
 				<label for="companyName">Date: </label>
-				<input type="date" class="form-control"  name="a_date" required>
+				<input type="date" class="form-control"  name="a_date" id="date_appointment" min='<?php echo date('Y-m-d', strtotime( date('Y-m-d')));?>' required>
 			</div>
 			<div class="form-group">
 				<label for="companyName">Time: </label>
-				<input type="time" class="form-control"  name="a_time" required>
+				 <select type="time" class="form-control" name="a_time" id="time-appointments" required>
+								<option value=""> - Select Time -</option>
+								<option> 10:00 AM</option>
+								<option> 10:30 AM</option>
+								<option> 11:00 AM</option> 
+								<option> 11:30 AM</option> 
+								<option> 1:00 PM</option>
+								<option> 1:30 PM</option>
+								<option> 2:00 PM</option>
+								<option> 2:30 PM</option>
+								<option> 3:00 PM</option>
+								<option> 3:30 PM</option>
+				 </select>
 			</div>
 			
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" >Close</button>
-				<button type="submit" class="btn btn-outline-primary" name="process">Process</button>
+				<button type="submit" class="btn btn-outline-primary" name="process" id="process" style="display:none;">Process</button>
+				<div id="not-available" clas="text-center" style="display:none;"> Sorry , This Date / Time is not available! </div>
 			</div>
 		</form>
 		</div>

@@ -37,7 +37,7 @@
 							</div>
 							<form class="form" method="POST">
 								<div class="form-body">
-									<h4 class="form-section"><i class="ft-user"></i> Medical History</h4>
+									<h4 class="form-section"><i class="ft-user"></i> Medical History </h4>
 									<table class="table alt-pagination wallet-wrapper table-bordered table-striped">
 									<thead>
 										<tr>
@@ -52,7 +52,7 @@
 									<?php while($val = $is_patients_history->fetch_object()){ ?>
 										<tr>
 											<td class="text-center"><?php echo $val->p_fname . ' '. $val->p_lastname;?></td>
-											<td class="text-center"><?php echo $val->d_fname . ' '. $val->d_lname;?></td>
+											<td class="text-center">Dr <?php echo $val->d_fname . ' '. $val->d_lname;?></td>
 											<td class="text-center"><?php echo $val->appointment_date;?></td>
 											<td class="text-center"><?php echo $val->appointment_time;?></td>
 											<td class="text-center"><?php if( $val->status == 0) { echo "Pending";} else { echo '<a href="#" data-toggle="modal" data-backdrop="false" data-target="#results'.$val->appointment_id.'" class="btn round btn-outline-info btn-sm"> <i class="la la-check"></i> View Results </a>';} ?></td>
@@ -62,14 +62,13 @@
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
-														<h4 class="modal-title" id="myModalLabel4"> Results</h4>
+														<h4 class="modal-title" id="myModalLabel4"> Results <input type="button" class="btn round btn-outline-info btn-sm" value="Print Result" onclick="PrintElem('#myDiv')" /></h4>
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="oewei8">
 															<span aria-hidden="true">×</span>
 														</button>
 													</div>
 													<div class="modal-body">
-													<form method="POST">
-												
+													<div id="myDiv">
 													<div class="row">
 														<div class="col-md-12">
 															<div class="form-group">
@@ -97,10 +96,10 @@
 													
 														</div>
 													</div>
+													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" >Close</button>
 													</div>
-												</form>
 												</div>
 											</div>
 										</div>

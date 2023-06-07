@@ -43,41 +43,80 @@
     <script>
 	$(".alt-pagination").DataTable({pagingType:"full_numbers"});
 	</script>
-	<script>
-	  (function(b,i,t,C,O,I,N) {
-		window.addEventListener('load',function() {
-		  if(b.getElementById(C))return;
-		  I=b.createElement(i),N=b.getElementsByTagName(i)[0];
-		  I.src=t;I.id=C;N.parentNode.insertBefore(I, N);
-		},false)
-	  })(document,'script','https://widgets.bitcoin.com/widget.js','btcwdgt');
-	</script>
-	<script type="text/javascript">
-					function minmax(value, min, max) 
-					{
-						if(parseInt(value) < min || isNaN(parseInt(value))) 
-							return min; 
-						else if(parseInt(value) > max) 
-							return max; 
-						else return value;
-					}
-	</script>
-	<script>
-	function CopyToClipboard(containerid) {
-		  if (document.selection) {
-			var range = document.body.createTextRange();
-			range.moveToElementText(document.getElementById(containerid));
-			range.select().createTextRange();
-			document.execCommand("copy");
-		  } else if (window.getSelection) {
-			var range = document.createRange();
-			range.selectNode(document.getElementById(containerid));
-			window.getSelection().addRange(range);
-			document.execCommand("copy");
-				alert("URL Copied! Share to your friends now.")
-		  }
-		}
-	</script>
+	 <script>
+var link = 'http://localhost/healthpoint/';
+
+ $('#date_appointment').on('change', function() {
+	 var doc_id =  $("#doctor_id").val();
+				$.ajax({
+				   type: "POST",
+				   url: link + 'controller/user-appointments.php',
+				   data : {
+							 'date'        : this.value , 
+							 'doctor_id'   : doc_id, 
+							 'check-date': 'check',
+						
+					},
+				   success: function(data)
+				   {
+						if(data == 'yes'){
+							$("#process").show();
+							$("#not-available").hide();
+						} else {
+							$("#not-available").show();
+							$("#process").hide();
+						}
+				   }
+			   });	
+	});
+	$('#time-appointments').on('change', function() {
+				var doc_id =  $("#doctor_id").val();
+				var date = $('#date_appointment').val();
+				$.ajax({
+				   type: "POST",
+				   url: link + 'controller/user-appointments.php',
+				   data : {
+							 'time'      : this.value , 
+							 'date'      : date ,
+							  'doctor_id': doc_id, 
+							 'check-time': 'check',
+						
+					},
+				   success: function(data)
+				   {
+						if(data == 'yes'){
+							$("#process").show();
+							$("#not-available").hide();
+						} else {
+							$("#not-available").show();
+							$("#process").hide();
+						}
+				   }
+			   });	
+	});
+ </script>
+  <script type="text/javascript">
+        function PrintElem(elem) {
+            Popup($(elem).html());
+        }
+
+        function Popup(data) {
+            var myWindow = window.open('', 'my div', 'height=400,width=600');
+            myWindow.document.write('<html><head><title>my div</title>');
+            /*optional stylesheet*/ //myWindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+            myWindow.document.write('</head><body >');
+            myWindow.document.write(data);
+            myWindow.document.write('</body></html>');
+            myWindow.document.close(); // necessary for IE >= 10
+
+            myWindow.onload=function(){ // necessary if the div contain images
+
+                myWindow.focus(); // necessary for IE >= 10
+                myWindow.print();
+                myWindow.close();
+            };
+        }
+    </script>
 	  <?php 
   
 		$calendar = array();

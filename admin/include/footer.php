@@ -357,7 +357,80 @@
 	});
 
  </script>
-  
+ <script>
+var link = 'http://localhost/healthpoint/';
+
+ $('#date_appointment').on('change', function() {
+	 var doc_id =  $("#doctor_id").val();
+				$.ajax({
+				   type: "POST",
+				   url: link + 'controller/user-appointments.php',
+				   data : {
+							 'date'        : this.value , 
+							 'doctor_id'   : doc_id, 
+							 'check-date': 'check',
+						
+					},
+				   success: function(data)
+				   {
+						if(data == 'yes'){
+							$("#process").show();
+							$("#not-available").hide();
+						} else {
+							$("#not-available").show();
+							$("#process").hide();
+						}
+				   }
+			   });	
+	});
+	$('#time-appointments').on('change', function() {
+				var doc_id =  $("#doctor_id").val();
+				var date = $('#date_appointment').val();
+				$.ajax({
+				   type: "POST",
+				   url: link + 'controller/user-appointments.php',
+				   data : {
+							 'time'      : this.value , 
+							 'date'      : date ,
+							  'doctor_id': doc_id, 
+							 'check-time': 'check',
+						
+					},
+				   success: function(data)
+				   {
+						if(data == 'yes'){
+							$("#process").show();
+							$("#not-available").hide();
+						} else {
+							$("#not-available").show();
+							$("#process").hide();
+						}
+				   }
+			   });	
+	});
+ </script>
+  <script type="text/javascript">
+        function PrintElem(elem) {
+            Popup($(elem).html());
+        }
+
+        function Popup(data) {
+            var myWindow = window.open('', 'my div', 'height=400,width=600');
+            myWindow.document.write('<html><head><title>my div</title>');
+            /*optional stylesheet*/ //myWindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+            myWindow.document.write('</head><body >');
+            myWindow.document.write(data);
+            myWindow.document.write('</body></html>');
+            myWindow.document.close(); // necessary for IE >= 10
+
+            myWindow.onload=function(){ // necessary if the div contain images
+
+                myWindow.focus(); // necessary for IE >= 10
+                myWindow.print();
+                myWindow.close();
+            };
+        }
+    </script>
   	<div class="modal" id="calendarmodal" tabindex="-1" role="dialog"
           aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">

@@ -10,6 +10,9 @@ else if($_GET['data'] == 'approved'){
 else if($_GET['data'] == 'done'){
 		$status = 2;
 }
+else if($_GET['data'] == 'declined'){
+		$status = 3;
+}
 
 $is_appointments = $mysqli->query("SELECT a.*, b.firstname as p_fname , b.lastname as p_lastname , c.firstname as d_fname , c.lastname as d_lname from is_appointments a
 								   LEFT JOIN is_patients b on b.patient_id  = a.patient_id
@@ -36,7 +39,51 @@ if(isset($_POST['process'])){
 							icon: "success",
 							type: "success"
 							}).then(function(){
-								window.location = "appointments";
+								window.location = "appointments?data=pending";
+							});
+							});
+			</script>';
+		
+	
+	
+}
+if(isset($_POST['process-approval'])){
+	
+	$appointment_id      = $_POST['appointment_id'];
+	
+	$mysqli->query("UPDATE is_appointments set status = 1 where appointment_id = '$appointment_id'");
+				
+		     echo '<script>
+			  $(document).ready(function() {
+					Swal.fire({
+							title: "Success! ",
+							text: "Appointment Successfully Approved",
+							icon: "success",
+							type: "success"
+							}).then(function(){
+								window.location = "appointments?data=pending";
+							});
+							});
+			</script>';
+		
+	
+	
+}
+if(isset($_POST['process-declined'])){
+	
+	$appointment_id      = $_POST['appointment_id'];
+	
+	$mysqli->query("UPDATE is_appointments set status = 3 where appointment_id = '$appointment_id'");
+				
+		     echo '<script>
+			  $(document).ready(function() {
+					Swal.fire({
+							title: "Success! ",
+							text: "Appointment Successfully Declined",
+							icon: "success",
+							type: "success"
+							}).then(function(){
+								window.location = "appointments?data=pending";
 							});
 							});
 			</script>';

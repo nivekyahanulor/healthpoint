@@ -58,64 +58,12 @@
 											<td class="text-center"><?php if( $val->status == 0) { echo "Pending";} else { echo '<i class="la la-check"></i> Approved';} ?></td>
 											<td class="text-center">
 											<?php  if($val->status == 0){?>
-												<button class="btn btn-sm round btn-outline-info" data-toggle="modal" data-target="#approved<?php echo $val->appointment_id;?>"> Approve </button>
-												<button class="btn btn-sm round btn-outline-warning" data-toggle="modal" data-target="#decline<?php echo $val->appointment_id;?>"> Decline </button>
+												
 											<?php }  else { echo '<a href="patient-profile?data='.$val->patient_id.'&appointment='.$val->appointment_id.'" class="btn round btn-outline-info btn-sm"> <i class="la la-check"></i> View Patient Record </a>';}?>
 											</td>
 										</tr>
-										<div class="modal fade text-left" id="approved<?php echo $val->appointment_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" style="display: none;" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h4 class="modal-title" id="myModalLabel4">Appointment Request</h4>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="oewei8">
-														<span aria-hidden="true">×</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														<form method="POST">
-														<div class="form-group">
-														
-															<b>Are you sure to approved this appointment request ?</b>
-													    	<input type="hidden" name="appointment_id" value="<?php echo $val->appointment_id;?>">
-														</div>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" fdprocessedid="pu6p1c">Close</button>
-														<button type="submit" class="btn btn-outline-success" name="process-approval">Approved</button>
-													</div>
-													</form>
-												</div>
-											</div>
-										</div>
 										
-										<div class="modal fade text-left" id="decline<?php echo $val->appointment_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" style="display: none;" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h4 class="modal-title" id="myModalLabel4">Appointment Request</h4>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="oewei8">
-														<span aria-hidden="true">×</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														<form method="POST">
-														<div class="form-group">
-														
-															<b>Are you sure to approved this appointment request ?</b>
-													    	<input type="hidden" name="withdrawal_id" value="<?php echo $val->withdrawal_id;?>">
-													    	<input type="hidden" name="user_id" value="<?php echo $val->customer_id;?>">
-													    	<input type="hidden" name="amount" value="<?php echo $val->amount;?>">
-														</div>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" fdprocessedid="pu6p1c">Close</button>
-														<button type="submit" class="btn btn-outline-success" name="process">Approved</button>
-													</div>
-													</form>
-												</div>
-											</div>
-										</div>
+									
 									<?php } ?>	
 								
 									</tbody>
@@ -129,47 +77,5 @@
         </div>
       </div>
     </div>
-<div class="modal fade text-left" id="backdrop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" style="display: none;" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel4">Appointments Details</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="oewei8">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<div class="modal-body">
-			<form method="POST">
-		
-			<div class="form-group">
-				<label for="companyName">Doctors Name: </label>
-				<select  class="form-control" name="doctor_id" required>
-					<option value=""> - Select Patient - </option>
-						<?php
-						$is_doctors = $mysqli->query("SELECT * from is_doctors");
-						while($val = $is_doctors->fetch_object()){
-					?>
-						<option value="<?php echo $val->doctor_id;?>"> Dr. <?php echo $val->firstname . ' '.  $val->lastname;?> </option>
-					<?php } ?>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="companyName">Date: </label>
-				<input type="date" class="form-control"  name="a_date" required>
-			</div>
-			<div class="form-group">
-				<label for="companyName">Time: </label>
-				<input type="time" class="form-control"  name="a_time" required>
-			</div>
-			
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" >Close</button>
-				<button type="submit" class="btn btn-outline-primary" name="process">Process</button>
-			</div>
-		</form>
-		</div>
-	</div>
-</div>
 
 <?php include("include/footer.php");?>

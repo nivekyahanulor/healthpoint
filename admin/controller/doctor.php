@@ -21,10 +21,11 @@ if(isset($_POST['process'])){
 		$password     = $_POST['password'];
 		$username     = $_POST['username'];
 		$speciality   = $_POST['speciality'];
-		$name         = $firstname .' '.$lastname;
 		
 		$mysqli->query("INSERT INTO is_doctors		(firstname,lastname,email,contact,password,username,speciality,is_active) 
 								VALUES ('$firstname','$lastname','$email','$contact','$password','$username','$speciality','1')");
+								
+								
 								
 		 echo '<script>
 			  $(document).ready(function() {

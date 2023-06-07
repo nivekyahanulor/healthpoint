@@ -69,19 +69,6 @@
 										</div>
 									</div>
 									
-									<h4 class="form-section"><i class="la la-user"></i> Account</h4>
-
-									<div class="form-group">
-										<label for="companyName">User Name:</label>
-										<input type="text" id="companyName" class="form-control" name="username" value="<?php echo $val->username;?>">
-									</div>
-
-									<div class="form-group">
-										<label for="companyName">Password:</label>
-										<input type="password" id="companyName" class="form-control" name="password" value="<?php echo $val->password;?>">
-									</div>
-
-							
 								
 								</div>
 

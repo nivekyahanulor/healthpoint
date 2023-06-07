@@ -19,12 +19,10 @@ if(isset($_POST['process'])){
 		$lastname     = $_POST['lastname'];
 		$email        = $_POST['email'];
 		$contact 	  = $_POST['mobile'];
-		$password     = $_POST['password'];
-		$username     = $_POST['username'];
 		$name         = $firstname .' '.$lastname;
 		
-		$mysqli->query("INSERT INTO is_patients		(firstname,lastname,email,contact,password,username,is_active) 
-								VALUES ('$firstname','$lastname','$email','$contact','$password','$username','1')");
+		$mysqli->query("INSERT INTO is_patients		(firstname,lastname,email,contact,is_active) 
+								VALUES ('$firstname','$lastname','$email','$contact','1')");
 								
 		 echo '<script>
 			  $(document).ready(function() {
