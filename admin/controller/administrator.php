@@ -1,6 +1,7 @@
 <?php
 include('../controller/database.php');
 
+$aname  = $_SESSION['name'];
 
 $is_users = $mysqli->query("SELECT * from is_users");
 
@@ -30,7 +31,8 @@ if(isset($_POST['process'])){
 						)
 					");
 					
-					
+	$mysqli->query("INSERT INTO is_logs		(name,logs) 
+								VALUES ('$aname','Added New Administrator')");						
   	       echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({
@@ -65,7 +67,8 @@ if(isset($_POST['process-update'])){
 						
 					");
 					
-					
+	$mysqli->query("INSERT INTO is_logs		(name,logs) 
+								VALUES ('$aname','Update Administrator Details')");					
   	       echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({
@@ -93,7 +96,8 @@ if(isset($_POST['process-delete'])){
 						
 					");
 					
-					
+	$mysqli->query("INSERT INTO is_logs		(name,logs) 
+								VALUES ('$aname','Delete Administrator Details')");					
   	       echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({

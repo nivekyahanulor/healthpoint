@@ -1,6 +1,8 @@
 <?php
 include('../controller/database.php');
 
+$aname  = $_SESSION['name'];
+
 if($_GET['data'] == 'pending'){
 		$status = 0;
 }
@@ -30,7 +32,8 @@ if(isset($_POST['process'])){
 	
 	$mysqli->query("INSERT INTO is_appointments		(patient_id,doctors_id,appointment_time,appointment_date,status) 
 								VALUES ('$patients_id','$doctor_id','$a_time','$a_date',0)");
-				
+	$mysqli->query("INSERT INTO is_logs		(name,logs) 
+								VALUES ('$aname','Add New Appointment')");			
 		     echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({
@@ -52,7 +55,9 @@ if(isset($_POST['process-approval'])){
 	$appointment_id      = $_POST['appointment_id'];
 	
 	$mysqli->query("UPDATE is_appointments set status = 1 where appointment_id = '$appointment_id'");
-				
+	
+	$mysqli->query("INSERT INTO is_logs		(name,logs) 
+								VALUES ('$aname','Approved Appointment')");			
 		     echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({
@@ -74,7 +79,8 @@ if(isset($_POST['process-declined'])){
 	$appointment_id      = $_POST['appointment_id'];
 	
 	$mysqli->query("UPDATE is_appointments set status = 3 where appointment_id = '$appointment_id'");
-				
+	$mysqli->query("INSERT INTO is_logs		(name,logs) 
+								VALUES ('$aname','Declined Appointment')");			
 		     echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({

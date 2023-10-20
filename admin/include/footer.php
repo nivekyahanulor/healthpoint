@@ -14,7 +14,7 @@
 	  <span id="scroll-top"></span></span></p>
     </footer>
     <!-- END: Footer-->
-
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="../assets/js/jquery.js"></script>
     <script src="../assets/js/popper.js"></script>
     <script src="../assets/js/bootstrap.js"></script>
@@ -43,8 +43,15 @@
 	<script src="https://code.highcharts.com/modules/data.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" />    
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
 	
-    <script>
+	<script>
+	
 	$(".alt-pagination").DataTable({pagingType:"full_numbers"});
 	</script>
 	
@@ -135,6 +142,32 @@
 
   </script>
     <?php
+		$now = date('Y-m-d');
+		$daily_report = $mysqli->query("SELECT COUNT(*) as total 
+								from is_appointments  WHERE DATE(date_added) = '$now'
+							");
+		$dailyres = array();
+		while($daily = $daily_report->fetch_object()){ 
+			 $dailyres[] = array("name" => "Appointment",
+								 "y" => $daily->total
+							);
+		}
+		
+		$weekly_report = $mysqli->query("select t.d,total , DAY   from 
+									( select 'Saturday' as d union all select 'Sunday' 
+									union all select 'Monday' union all select 'Tuesday' 
+									union all select 'Wednesday' union all select 'Thursday' 
+									union all select 'Friday' )t 
+									left join ( SELECT DAYNAME(a.date_added) AS DAY, 
+									 COUNT(*) as total FROM `is_appointments` a 
+									WHERE a.date_added >= DATE(NOW()) - INTERVAL 7 DAY GROUP BY DAY )t1 on t.d=t1.day");
+		$weeklyres = array();
+		while($weekly = $weekly_report->fetch_object()){ 
+			 $weeklyres[] = array("name" => $weekly->d,
+								   "y" => $weekly->total
+							);
+		}
+	
   	
 		$approvedr	= $mysqli->query("
 			SELECT SUM(IF(month = 'Jan', total, 0)) AS 'Jan', 
@@ -261,6 +294,110 @@
   
   
   ?>
+    <script>
+	// DAILY
+	Highcharts.chart('container-daily', {
+		chart: {
+			type: 'column'
+		},
+		title: {
+			align: 'center',
+			text: 'Daily  Report'
+		},
+		accessibility: {
+			announceNewData: {
+				enabled: true
+			}
+		},
+		xAxis: {
+			type: 'category'
+		},
+		yAxis: {
+			title: {
+				text: 'Total Appointment'
+			}
+
+		},
+		legend: {
+			enabled: false
+		},
+		plotOptions: {
+			series: {
+				borderWidth: 0,
+				dataLabels: {
+					enabled: true,
+					format: '{point.y}'
+				}
+			}
+		},
+
+		tooltip: {
+			headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+			pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> of total<br/>'
+		},
+
+		series: [
+			{
+				name: "Browsers",
+				colorByPoint: true,
+				data: <?php echo json_encode($dailyres,JSON_NUMERIC_CHECK);?>
+			}
+		]
+	});
+  </script>
+   <script>
+	//WEEKLY
+	
+	Highcharts.chart('container-weekly', {
+		chart: {
+			type: 'column'
+		},
+		title: {
+			align: 'center',
+			text: 'Weekly  Report'
+		},
+		accessibility: {
+			announceNewData: {
+				enabled: true
+			}
+		},
+		xAxis: {
+			type: 'category'
+		},
+		yAxis: {
+			title: {
+				text: 'Total Appointment'
+			}
+
+		},
+		legend: {
+			enabled: false
+		},
+		plotOptions: {
+			series: {
+				borderWidth: 0,
+				dataLabels: {
+					enabled: true,
+					format: '{point.y}'
+				}
+			}
+		},
+
+		tooltip: {
+			headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+			pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> of total<br/>'
+		},
+
+		series: [
+			{
+				name: "Day",
+				colorByPoint: true,
+				data: <?php echo json_encode($weeklyres,JSON_NUMERIC_CHECK);?>
+			}
+		]
+	});
+
+	</script>
    <script>
 	Highcharts.chart('container-1', {
 		chart: {
@@ -409,6 +546,42 @@ var link = 'http://localhost/healthpoint/';
 			   });	
 	});
  </script>
+ <script>
+	$('.orderqoutes').on('shown.bs.modal', function() {
+	  $('.summernote').summernote({
+		  height: 200,
+		  focus: true
+		});
+	})
+	 $('#summernote1').summernote({
+		  height: 400,
+		  focus: true
+	});
+	$('#summernote2').summernote({
+		  height: 400,
+		  focus: true
+	});
+	$('#summernote3').summernote({
+		  height: 400,
+		  focus: true
+	});
+	</script>
+	<script>
+	$(document).ready(function() {
+            $('#table_id').DataTable({
+
+                dom: 'Bfrtip',
+                responsive: true,
+                pageLength: 25,
+                // lengthMenu: [0, 5, 10, 20, 50, 100, 200, 500],
+
+                buttons: [
+                     'csv', 'excel', 'pdf', 'print'
+                ]
+
+            });
+        });
+	</script>
   <script type="text/javascript">
         function PrintElem(elem) {
             Popup($(elem).html());

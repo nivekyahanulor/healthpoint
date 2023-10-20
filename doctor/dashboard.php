@@ -14,8 +14,9 @@
       <div class="content-wrapper">
         <div class="content-header row">
         </div>
-        <div class="content-body"><div id="crypto-stats-3" class="row">
-		 <div class="col-xl-5 col-12">
+        <div class="content-body">
+		<div id="crypto-stats-3" class="row">
+		 <div class="col-xl-6 col-12">
         <div class="card crypto-card-3 pull-up">
             <div class="card-content">
                 <div class="card-body pb-0">
@@ -25,7 +26,7 @@
 						<i class="la la-user  info font-large-2"></i>
                         </div>
                         <div class="col-5 pl-2">
-                            <h4>TOTAL APPOINTMENTS</h4>
+                            <h4>TOTAL APPOINTMENT</h4>
                         </div>
                         <div class="col-5 text-right">
                             <h2> <?php echo $totalcustomer;?></h2>
@@ -33,13 +34,33 @@
                     </div>
 				</a>
                 </div>
-                <div class="row">
-                    <div class="col-12"><canvas id="btc-chartjs" class="height-75"></canvas></div>
-                </div>
+            <div style="height:51px;"></div>
             </div>
         </div>
-    </div>
-		<div class="col-xl-7 col-12">
+		</div>
+		<div class="col-xl-6 col-12">
+        <div class="card crypto-card-3 pull-up">
+            <div class="card-content">
+                <div class="card-body pb-0">
+				<a href="tes">
+                    <div class="row">
+                        <div class="col-2">
+						<i class="la la-user  info font-large-2"></i>
+                        </div>
+                        <div class="col-5 pl-2">
+                            <h4>TOTAL PATIENTS</h4>
+                        </div>
+                        <div class="col-5 text-right">
+                            <h2> <?php echo $totalcustomer;?></h2>
+                        </div>
+                    </div>
+				</a>
+                </div>
+            <div style="height:60px;"></div>
+            </div>
+        </div>
+		</div>
+		<div class="col-xl-12 col-12">
         <div class="card crypto-card-3 pull-up">
             <div class="card-content">
                 <div class="card-body pb-0">

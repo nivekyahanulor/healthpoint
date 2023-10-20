@@ -24,7 +24,9 @@
 			<li class="nav-item">
 			  <a href="patient-medical-history?data=<?php echo $_GET['data'];?>"  class="nav-link" >Medical History</a>
 			</li>
-			
+			<li class="nav-item">
+			  <a href="patient-medical-admission?data=<?php echo $_GET['data'];?>"  class="nav-link " >Admission</a>
+			</li>
 		  </ul>
 		<div class="row match-height">
 		

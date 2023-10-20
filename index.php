@@ -1,6 +1,5 @@
 <?php include("include/header.php");?>
 
-
 <section class="home" id="home">
 
     <div class="image">
@@ -8,7 +7,7 @@
     </div>
 
     <div class="content">
-        <h3>ONLINE HEALTH RECORD SYSTEM  FOR HEALTHPOINT</h3>
+        <h3>ONLINE HEALTH RECORD SYSTEM  FOR <?php echo strtoupper($sval[1]);?></h3>
         <p>Forget about storage filling to keep patient records. the effective management tool for medical clinics, at your service.</p>
         <a href="#book"> </a>
     </div>
@@ -28,8 +27,13 @@
         </div>
 
         <div class="content">
-            <h3>Improve Clinic Management</h3>
-            <p>ONLINE HEALTH RECORD SYSTE allows you to access your patient records using a desktop. We've made the vital data easily accessible for you to make clinic operations more efficient. The information stored in Compendium makes it easier to recall which patient has seen you in a long time. </p>
+            <h3>ABOUT US</h3>
+            <p><?php echo htmlspecialchars_decode($sval[8]);?> </p>
+
+			<h3>MISSION</h3>
+            <p><?php echo htmlspecialchars_decode($sval[6]);?> </p>
+			<h3>VISION</h3>
+            <p><?php echo htmlspecialchars_decode($sval[9]);?> </p>
         </div>
 
     </div> 
@@ -40,35 +44,20 @@
 
 <section class="services" id="services">
 
-     <h1 class="heading"> our <span>services</span> </h1>
+     <h1 class="heading"> our <span>doctors</span> </h1>
 
     <div class="box-container">
-
+		<?php
+		$is_doctors = $mysqli->query("SELECT * from is_doctors");
+		while($val = $is_doctors->fetch_object()){ 
+		?>
         <div class="box">
             <i class="fas fa-notes-medical"></i>
-            <h3>Patient Information</h3>
-            <p>Access and update your important patient records from your desktop by storing them safely in the db. </p>
+            <h3>Dr. <?php echo $val->firstname . ' ' . $val->lastname;?></h3>
+            <p>Speciality : <?php echo  $val->speciality;?></p>
         </div>
-
-        <div class="box">
-            <i class="fas fa-ambulance"></i>
-            <h3>Manage Different Clinics in One System</h3>
-            <p>Organize numerous records from different clinics.</p>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-user-md"></i>
-            <h3>Multi User</h3>
-            <p>Create A User Account For Your Personnel To Access Your Medical Clinic Management System.</p>
-            
-        </div>
-
-        <div class="box">
-            <i class="fas fa-pills"></i>
-            <h3>Dashboard</h3>
-            <p>Check On The Activity At Your Clinic. With Only A Quick Glance At Your Screen, You Easily Check Patient Records.</p>
-            
-        </div>
+		<?php } ?>
+      
 </div>
 </section>
 

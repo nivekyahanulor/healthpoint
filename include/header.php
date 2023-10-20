@@ -194,6 +194,11 @@
 </head>
 <body>
     
+ <?php 
+	include("controller/database.php");
+	$settings_val = $mysqli->query("SELECT * from is_settings");
+    $sval = $settings_val->fetch_row();
+  ?>
 <!-- header section starts  -->
 
 <header class="header">
@@ -203,7 +208,7 @@
     <nav class="navbar">
         <a href="index.php#home">home</a>
         <a href="index.php#about">about</a>
-        <a href="index.php#services">services</a>
+        <a href="index.php#services">our doctors</a>
         <a href="login.php">Login</a>
     </nav>
 

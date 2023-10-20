@@ -54,6 +54,12 @@
             $doctors = 'active';
         }else if ($page == 'admins' ) {
             $admins = 'active';
+        }else if ($page == 'settings' ) {
+            $settings = 'active';
+        }else if ($page == 'logs' ) {
+            $logs = 'active';
+        }else if ($page == 'reports' ) {
+            $reports = 'active';
         }
 	?>
     <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
@@ -64,6 +70,9 @@
           <li class=" nav-item <?php echo $patients;?>"><a href="patients"><i class="la la-users"></i><span class="menu-title" data-i18n="eCommerce"> Patients</span></a></li>
           <li class=" nav-item <?php echo $appointments;?>"><a href="appointments?data=pending"><i class="la la-clipboard"></i><span class="menu-title" data-i18n="eCommerce"> Appointments</span></a></li>
           <li class=" nav-item <?php echo $admins;?>"><a href="admins"><i class="la la-users"></i><span class="menu-title" data-i18n="eCommerce">  Administrators</span></a></li>
+          <li class=" nav-item <?php echo $reports;?>"><a href="reports"><i class="la la-signal"></i><span class="menu-title" data-i18n="eCommerce">  Reports</span></a></li>
+          <li class=" nav-item <?php echo $settings;?>"><a href="settings"><i class="la la-gear"></i><span class="menu-title" data-i18n="eCommerce">  Settings</span></a></li>
+          <li class=" nav-item <?php echo $logs;?>"><a href="logs"><i class="la la-history"></i><span class="menu-title" data-i18n="eCommerce">  History Logs</span></a></li>
           <li class=" nav-item"><a href="logout"><i class="la la-unlock"></i><span class="menu-title" data-i18n="eCommerce"> Sign-Out</span></a></li>
         </ul>
       </div>

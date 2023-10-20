@@ -7,14 +7,14 @@
             <h3>quick links</h3>
             <a href="#"> <i class="fas fa-chevron-right"></i> home </a>
             <a href="#"> <i class="fas fa-chevron-right"></i> about </a>
-            <a href="#services"> <i class="fas fa-chevron-right"></i> services </a>
+            <a href="#services"> <i class="fas fa-chevron-right"></i> our doctors </a>
         
         </div>
 
         <div class="box">
             <h3>contact info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +63969-512-0627</a>
-            <a href="https://mail.google.com" target="_blank"> <i class="fas fa-envelope"></i> healthpoint.22@gmail.com </a>
+            <a href="#"> <i class="fas fa-phone"></i> <?php echo  $sval[3];?></a>
+            <a href="https://mail.google.com" target="_blank"> <i class="fas fa-envelope"></i> <?php echo  $sval[2];?></a>
         </div>
 
         <div class="box">

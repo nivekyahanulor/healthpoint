@@ -22,10 +22,10 @@
 			  <a href="patient-profile?data=<?php echo $_GET['data'];?>" class="nav-link ">Patient Information </a>
 			</li>
 			<li class="nav-item">
-			  <a href="patient-medical-history?data=<?php echo $_GET['data'];?>"  class="nav-link active" >Medical History</a>
+			  <a href="patient-medical-history?data=<?php echo $_GET['data'];?>"  class="nav-link " >Medical History</a>
 			</li>
 			<li class="nav-item">
-			  <a href="patient-medical-admission?data=<?php echo $_GET['data'];?>"  class="nav-link " >Admission</a>
+			  <a href="patient-medical-admission?data=<?php echo $_GET['data'];?>"  class="nav-link active" >Admission</a>
 			</li>
 			
 		  </ul>
@@ -40,7 +40,7 @@
 							</div>
 							<form class="form" method="POST">
 								<div class="form-body">
-									<h4 class="form-section"><i class="ft-user"></i> Medical History </h4>
+									<h4 class="form-section"><i class="ft-user"></i> Admission History </h4>
 								<table class="table table-bordered table-hover" id="table_id">
 									<thead>
 										<tr>

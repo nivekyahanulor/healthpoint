@@ -3,6 +3,7 @@ include('../controller/database.php');
 
 error_reporting(0);
 $doctors_id = $_GET['data'];
+$aname  = $_SESSION['name'];
 
 $is_doctors = $mysqli->query("SELECT * from is_doctors");
 
@@ -25,7 +26,8 @@ if(isset($_POST['process'])){
 		$mysqli->query("INSERT INTO is_doctors		(firstname,lastname,email,contact,password,username,speciality,is_active) 
 								VALUES ('$firstname','$lastname','$email','$contact','$password','$username','$speciality','1')");
 								
-								
+		$mysqli->query("INSERT INTO is_logs		(name,logs) 
+								VALUES ('$aname','Add New Doctor')");								
 								
 		 echo '<script>
 			  $(document).ready(function() {
