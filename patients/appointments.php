@@ -20,10 +20,22 @@
 						<div class="card-header">
 						
 							<h4 class="card-title"> Appointments Records </h4>
+							<?php
+							$patients_id    = $_SESSION['id'];
+							$datenow        = date('Y-m-d');
+							$check = $mysqli->query("SELECT * from is_appointments where patient_id ='$patients_id' and DATE(date_added) = '$datenow'");
+							$count = $check->num_rows;
+							if($count == 1){?>
+							
+							<div class="heading-elements">
+								<font color="red"> <b>Only One Appointment Per Day! Thank You!</b></font>
+							</div>
+							<?php } else { ?>
 							<div class="heading-elements">
 								<button class="btn btn-sm round btn-info btn-glow" data-toggle="modal" data-backdrop="false" data-target="#backdrop"><i class="la la-plus font-medium-1"></i>
 								Add Appointments </button>
 							</div>
+							<?php } ?>
 							<br>
 						
 						</div>
@@ -34,10 +46,10 @@
 								<table class="table alt-pagination wallet-wrapper table-bordered table-striped">
 									<thead>
 										<tr>
-											<th class="text-center">Doctors Name</th>
-											<th class="text-center">Date</th>
-											<th class="text-center">Time</th>
-											<th class="text-center">Status</th>
+											<th class="text-center">DOCTORS NAME</th>
+											<th class="text-center">DATE</th>
+											<th class="text-center">TIME</th>
+											<th class="text-center">STATUS</th>
 										</tr>
 									</thead>
 									<tbody>

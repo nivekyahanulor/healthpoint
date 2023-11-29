@@ -2,6 +2,7 @@
 include('../controller/database.php');
 
 $user = $_SESSION['id'];
+$name = $_SESSION['name'];
 
 if($_GET['data'] == 'pending'){
 		$status = 0;
@@ -20,6 +21,33 @@ $is_appointments = $mysqli->query("SELECT a.*, b.firstname as p_fname , b.lastna
 								
 
 
+if(isset($_POST['process'])){
+	
+	$patients_id    = $_POST['patients_id'];
+	$doctor_id      = $_POST['doctor_id'];
+	$a_date 		= $_POST['a_date'];
+	$a_time         = $_POST['a_time'];
+	
+	$mysqli->query("INSERT INTO is_appointments		(patient_id,doctors_id,appointment_time,appointment_date,status) 
+								VALUES ('$patients_id','$doctor_id','$a_time','$a_date',0)");
+	$mysqli->query("INSERT INTO is_logs		(name,logs,doc_id) 
+								VALUES ('$name','Add New Appointment','$user')");			
+		     echo '<script>
+			  $(document).ready(function() {
+					Swal.fire({
+							title: "Success! ",
+							text: "Appointment Successfully Added",
+							icon: "success",
+							type: "success"
+							}).then(function(){
+								window.location = "appointments?data=pending";
+							});
+							});
+			</script>';
+		
+	
+	
+}
 if(isset($_POST['process-approval'])){
 	
 	$appointment_id      = $_POST['appointment_id'];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2023 at 09:10 AM
+-- Generation Time: Nov 29, 2023 at 06:48 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -45,8 +45,10 @@ CREATE TABLE `is_appointments` (
 --
 
 INSERT INTO `is_appointments` (`appointment_id`, `patient_id`, `doctors_id`, `appointment_time`, `appointment_date`, `status`, `consultation`, `diagnosis`, `treatment`, `date_added`) VALUES
-(1, 1, 1, '10:00 AM', '2023-10-19', 1, '', '', '', '2023-10-20 11:15:59'),
-(2, 1, 1, '11:30 AM', '2023-10-19', 0, '', '', '', '2023-10-20 12:54:29');
+(1, 1, 1, '10:00 AM', '2023-10-19', 2, '', '', '', '2023-10-20 11:15:59'),
+(2, 1, 1, '11:30 AM', '2023-10-19', 2, '11', '1', '1', '2023-10-20 12:54:29'),
+(3, 1, 1, '10:00 AM', '2023-11-29', 0, '', '', '', '2023-11-29 13:13:11'),
+(4, 1, 1, '11:00 AM', '2023-11-29', 0, '', '', '', '2023-11-29 13:48:03');
 
 -- --------------------------------------------------------
 
@@ -86,6 +88,8 @@ CREATE TABLE `is_logs` (
   `id` int(12) NOT NULL,
   `name` varchar(100) NOT NULL,
   `logs` text NOT NULL,
+  `patient_id` varchar(12) NOT NULL,
+  `doc_id` varchar(12) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -93,33 +97,37 @@ CREATE TABLE `is_logs` (
 -- Dumping data for table `is_logs`
 --
 
-INSERT INTO `is_logs` (`id`, `name`, `logs`, `date_added`) VALUES
-(1, 'health point', 'Add New Appointment', '2023-10-19 12:54:29'),
-(2, 'health point', 'Approved Appointment', '2023-10-19 12:57:58'),
-(3, 'health point', 'Update System Settings', '2023-10-19 13:30:31'),
-(4, 'health point', 'Update System Settings', '2023-10-19 13:31:12'),
-(5, 'health point', 'Update System Settings', '2023-10-19 13:31:32'),
-(6, 'health point', 'Update System Settings', '2023-10-19 13:31:46'),
-(7, 'health point', 'Update System Settings', '2023-10-20 10:27:06'),
-(8, 'health point', 'Update System Settings', '2023-10-20 10:30:22'),
-(9, 'health point', 'Update System Settings', '2023-10-20 10:32:26'),
-(10, 'health point', 'Update System Settings', '2023-10-20 10:32:32'),
-(11, 'health point', 'Update System Settings', '2023-10-20 10:33:28'),
-(12, 'health point', 'Update System Settings', '2023-10-20 10:34:22'),
-(13, 'health point', 'Update System Settings', '2023-10-20 10:34:26'),
-(14, 'health point', 'Update System Settings', '2023-10-20 10:36:11'),
-(15, 'health point', 'Update System Settings', '2023-10-20 10:36:45'),
-(16, 'health point', 'Update System Settings', '2023-10-20 10:36:53'),
-(17, 'health point', 'Update System Settings', '2023-10-20 10:37:02'),
-(18, 'health point', 'Update System Settings', '2023-10-20 10:37:07'),
-(19, 'health point', 'Update System Settings', '2023-10-20 10:37:23'),
-(20, 'health point', 'Update System Settings', '2023-10-20 10:37:54'),
-(21, 'health point', 'Update System Settings', '2023-10-20 10:38:11'),
-(22, 'health point', 'Update System Settings', '2023-10-20 10:38:31'),
-(23, 'health point', 'Update System Settings', '2023-10-20 10:38:38'),
-(24, 'health point', 'Update System Settings', '2023-10-20 10:38:47'),
-(25, 'health point', 'Update System Settings', '2023-10-20 10:39:09'),
-(26, 'health point', 'Update System Settings', '2023-10-20 10:39:19');
+INSERT INTO `is_logs` (`id`, `name`, `logs`, `patient_id`, `doc_id`, `date_added`) VALUES
+(1, 'health point', 'Add New Appointment', '', '', '2023-10-19 12:54:29'),
+(2, 'health point', 'Approved Appointment', '', '', '2023-10-19 12:57:58'),
+(3, 'health point', 'Update System Settings', '', '', '2023-10-19 13:30:31'),
+(4, 'health point', 'Update System Settings', '', '', '2023-10-19 13:31:12'),
+(5, 'health point', 'Update System Settings', '', '', '2023-10-19 13:31:32'),
+(6, 'health point', 'Update System Settings', '', '', '2023-10-19 13:31:46'),
+(7, 'health point', 'Update System Settings', '', '', '2023-10-20 10:27:06'),
+(8, 'health point', 'Update System Settings', '', '', '2023-10-20 10:30:22'),
+(9, 'health point', 'Update System Settings', '', '', '2023-10-20 10:32:26'),
+(10, 'health point', 'Update System Settings', '', '', '2023-10-20 10:32:32'),
+(11, 'health point', 'Update System Settings', '', '', '2023-10-20 10:33:28'),
+(12, 'health point', 'Update System Settings', '', '', '2023-10-20 10:34:22'),
+(13, 'health point', 'Update System Settings', '', '', '2023-10-20 10:34:26'),
+(14, 'health point', 'Update System Settings', '', '', '2023-10-20 10:36:11'),
+(15, 'health point', 'Update System Settings', '', '', '2023-10-20 10:36:45'),
+(16, 'health point', 'Update System Settings', '', '', '2023-10-20 10:36:53'),
+(17, 'health point', 'Update System Settings', '', '', '2023-10-20 10:37:02'),
+(18, 'health point', 'Update System Settings', '', '', '2023-10-20 10:37:07'),
+(19, 'health point', 'Update System Settings', '', '', '2023-10-20 10:37:23'),
+(20, 'health point', 'Update System Settings', '', '', '2023-10-20 10:37:54'),
+(21, 'health point', 'Update System Settings', '', '', '2023-10-20 10:38:11'),
+(22, 'health point', 'Update System Settings', '', '', '2023-10-20 10:38:31'),
+(23, 'health point', 'Update System Settings', '', '', '2023-10-20 10:38:38'),
+(24, 'health point', 'Update System Settings', '', '', '2023-10-20 10:38:47'),
+(25, 'health point', 'Update System Settings', '', '', '2023-10-20 10:39:09'),
+(26, 'health point', 'Update System Settings', '', '', '2023-10-20 10:39:19'),
+(27, 'Sample Sample', 'Update Profile', '1 ', '', '2023-11-29 13:01:13'),
+(28, 'Kevin Roluna', 'Update Patients Profile', '', '1', '2023-11-29 13:08:53'),
+(29, 'Sample Sample', 'Add New Appointment', '1 ', '', '2023-11-29 13:13:11'),
+(30, 'Kevin Roluna', 'Add New Appointment', '', '1', '2023-11-29 13:48:03');
 
 -- --------------------------------------------------------
 
@@ -252,7 +260,7 @@ ALTER TABLE `is_users`
 -- AUTO_INCREMENT for table `is_appointments`
 --
 ALTER TABLE `is_appointments`
-  MODIFY `appointment_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `appointment_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `is_doctors`
@@ -264,7 +272,7 @@ ALTER TABLE `is_doctors`
 -- AUTO_INCREMENT for table `is_logs`
 --
 ALTER TABLE `is_logs`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `is_patients`

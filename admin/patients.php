@@ -38,11 +38,11 @@
 								<table class="table alt-pagination wallet-wrapper table-bordered table-striped">
 									<thead>
 										<tr>
-											<th class="text-center">Name </th>
-											<th class="text-center">Contact</th>
-											<th class="text-center">Email Address</th>
-											<th class="text-center">User Name</th>
-											<th class="text-center">Action</th>
+											<th class="text-center">NAME </th>
+											<th class="text-center">CONTACT</th>
+											<th class="text-center">EMAIL ADDRESS</th>
+											<th class="text-center">USER NAME</th>
+											<th class="text-center">ACTION</th>
 										</tr>
 									</thead>
 									<tbody>

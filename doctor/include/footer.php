@@ -39,7 +39,58 @@
 	<script src="../assets/sweetalert2/sweetalert2.all.min.js" ></script>
     <script src="../assets/js/dashboard-crypto.min.js"></script>
 	
-	
+	<script>
+var link = 'http://localhost/healthpoint/';
+
+ $('#date_appointment').on('change', function() {
+	 var doc_id =  $("#doctor_id").val();
+				$.ajax({
+				   type: "POST",
+				   url: link + 'controller/user-appointments.php',
+				   data : {
+							 'date'        : this.value , 
+							 'doctor_id'   : doc_id, 
+							 'check-date': 'check',
+						
+					},
+				   success: function(data)
+				   {
+						if(data == 'yes'){
+							$("#process").show();
+							$("#not-available").hide();
+						} else {
+							$("#not-available").show();
+							$("#process").hide();
+						}
+				   }
+			   });	
+	});
+	$('#time-appointments').on('change', function() {
+				var doc_id =  $("#doctor_id").val();
+				var date = $('#date_appointment').val();
+				$.ajax({
+				   type: "POST",
+				   url: link + 'controller/user-appointments.php',
+				   data : {
+							 'time'      : this.value , 
+							 'date'      : date ,
+							  'doctor_id': doc_id, 
+							 'check-time': 'check',
+						
+					},
+				   success: function(data)
+				   {
+						if(data == 'yes'){
+							$("#process").show();
+							$("#not-available").hide();
+						} else {
+							$("#not-available").show();
+							$("#process").hide();
+						}
+				   }
+			   });	
+	});
+ </script>
     <script>
 	$(".alt-pagination").DataTable({pagingType:"full_numbers"});
 	</script>

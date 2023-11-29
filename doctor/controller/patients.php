@@ -2,6 +2,8 @@
 include('../controller/database.php');
 error_reporting(0);
 
+$doc         = $_SESSION['name'];
+$id          = $_SESSION['id'];
 $user        = $_GET['data'];
 $appointment = $_GET['appointment'];
 
@@ -98,7 +100,8 @@ if(isset($_POST['update-profile_1'])){
 					status = 2
 					where appointment_id='$appointment'");
 		
-		
+	$mysqli->query("INSERT INTO is_logs		(name,logs,doc_id) 
+								VALUES ('$doc','Update Patients Profile','$id')");		
 	 echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({

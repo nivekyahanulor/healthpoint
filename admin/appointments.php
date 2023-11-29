@@ -48,13 +48,13 @@
 								<table class="table alt-pagination wallet-wrapper table-bordered table-striped">
 									<thead>
 										<tr>
-											<th class="text-center">Patient Name</th>
-											<th class="text-center">Doctors Name</th>
-											<th class="text-center">Date</th>
-											<th class="text-center">Time</th>
+											<th class="text-center">PATIENT NAME</th>
+											<th class="text-center">DOCTORS NAME</th>
+											<th class="text-center">DATE</th>
+											<th class="text-center">TIME</th>
 											<?php if($_GET['data'] != 'declined'){?>
-											<th class="text-center">Status</th>
-											<th class="text-center">Action</th>
+											<th class="text-center">STATUS</th>
+											<th class="text-center">ACTION</th>
 											<?php } ?>
 											
 
@@ -96,7 +96,7 @@
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" fdprocessedid="pu6p1c">Close</button>
-														<button type="submit" class="btn btn-outline-success" name="process-approval">Approved</button>
+														<button type="submit" class="btn btn-outline-success" name="process-approval">Approve</button>
 													</div>
 													</form>
 												</div>
@@ -122,7 +122,7 @@
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" fdprocessedid="pu6p1c">Close</button>
-														<button type="submit" class="btn btn-outline-warning" name="process-declined">Declined</button>
+														<button type="submit" class="btn btn-outline-warning" name="process-declined">Decline</button>
 													</div>
 													</form>
 												</div>

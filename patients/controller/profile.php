@@ -16,7 +16,7 @@ if(isset($_POST['update-profile'])){
 	$username	 = $_POST['username'];
 	$password	 = $_POST['password'];
 	$email	     = $_POST['email'];
-	
+	$name        = $firstname .' '. $lastname;
 	$mysqli->query("UPDATE 
 					is_patients set 
 					firstname='$firstname' ,
@@ -27,7 +27,8 @@ if(isset($_POST['update-profile'])){
 					email='$email'
 					where patient_id='$user'");
 		
-		
+	$mysqli->query("INSERT INTO is_logs		(name,logs,patient_id) 
+								VALUES ('$name','Update Profile','$user ')");		
 	 echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({

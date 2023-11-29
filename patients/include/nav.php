@@ -52,6 +52,8 @@
             $withdrawal = 'active';
         }else if ($page == 'profile' ) {
             $profile = 'active';
+        }else if ($page == 'logs' ) {
+            $logs = 'active';
         }
 	?>
     <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
@@ -60,6 +62,7 @@
           <li class=" nav-item <?php echo $dashboard;?>"><a href="dashboard"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a> </li>
           <li class=" nav-item <?php echo $appointments;?>"><a href="appointments"><i class="la la-clipboard"></i><span class="menu-title" data-i18n="eCommerce"> Appointments</span></a></li>
           <li class=" nav-item <?php echo $profile;?>"><a href="profile"><i class="la la-user"></i><span class="menu-title" data-i18n="eCommerce"> Profile</span></a></li>
+          <li class=" nav-item <?php echo $logs;?>"><a href="logs"><i class="la la-history"></i><span class="menu-title" data-i18n="eCommerce"> History Logs</span></a></li>
           <li class=" nav-item"><a href="logout"><i class="la la-unlock"></i><span class="menu-title" data-i18n="eCommerce"> Sign-Out</span></a></li>
          
         </ul>
