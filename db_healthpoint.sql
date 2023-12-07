@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2023 at 06:48 AM
+-- Generation Time: Dec 07, 2023 at 12:12 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -37,6 +37,7 @@ CREATE TABLE `is_appointments` (
   `consultation` text NOT NULL,
   `diagnosis` text NOT NULL,
   `treatment` text NOT NULL,
+  `reason` text NOT NULL,
   `date_added` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -44,11 +45,11 @@ CREATE TABLE `is_appointments` (
 -- Dumping data for table `is_appointments`
 --
 
-INSERT INTO `is_appointments` (`appointment_id`, `patient_id`, `doctors_id`, `appointment_time`, `appointment_date`, `status`, `consultation`, `diagnosis`, `treatment`, `date_added`) VALUES
-(1, 1, 1, '10:00 AM', '2023-10-19', 2, '', '', '', '2023-10-20 11:15:59'),
-(2, 1, 1, '11:30 AM', '2023-10-19', 2, '11', '1', '1', '2023-10-20 12:54:29'),
-(3, 1, 1, '10:00 AM', '2023-11-29', 0, '', '', '', '2023-11-29 13:13:11'),
-(4, 1, 1, '11:00 AM', '2023-11-29', 0, '', '', '', '2023-11-29 13:48:03');
+INSERT INTO `is_appointments` (`appointment_id`, `patient_id`, `doctors_id`, `appointment_time`, `appointment_date`, `status`, `consultation`, `diagnosis`, `treatment`, `reason`, `date_added`) VALUES
+(1, 1, 1, '10:00 AM', '2023-10-19', 2, '', '', '', '', '2023-10-20 11:15:59'),
+(2, 1, 1, '11:30 AM', '2023-10-19', 2, '11', '1', '1', '', '2023-10-20 12:54:29'),
+(3, 1, 1, '10:00 AM', '2023-11-29', 1, '', '', '', '', '2023-11-29 13:13:11'),
+(4, 1, 1, '11:00 AM', '2023-11-29', 4, '', '', '', 'sdaasd', '2023-11-29 13:48:03');
 
 -- --------------------------------------------------------
 
@@ -127,7 +128,10 @@ INSERT INTO `is_logs` (`id`, `name`, `logs`, `patient_id`, `doc_id`, `date_added
 (27, 'Sample Sample', 'Update Profile', '1 ', '', '2023-11-29 13:01:13'),
 (28, 'Kevin Roluna', 'Update Patients Profile', '', '1', '2023-11-29 13:08:53'),
 (29, 'Sample Sample', 'Add New Appointment', '1 ', '', '2023-11-29 13:13:11'),
-(30, 'Kevin Roluna', 'Add New Appointment', '', '1', '2023-11-29 13:48:03');
+(30, 'Kevin Roluna', 'Add New Appointment', '', '1', '2023-11-29 13:48:03'),
+(31, 'health point', 'Approved Appointment', '', '', '2023-12-07 17:55:48'),
+(32, 'health point', 'Process Missed Appointment', '', '', '2023-12-07 19:01:05'),
+(33, 'health point', 'Process Missed Appointment', '', '', '2023-12-07 19:01:41');
 
 -- --------------------------------------------------------
 
@@ -162,7 +166,8 @@ CREATE TABLE `is_patients` (
 --
 
 INSERT INTO `is_patients` (`patient_id`, `firstname`, `lastname`, `address`, `contact`, `email`, `username`, `password`, `bp`, `glucose`, `heartrate`, `cholesterol`, `symptoms`, `i_company`, `i_number`, `i_amount`, `i_expiry`, `is_active`, `date_added`) VALUES
-(1, 'Sample', 'Sample', '', '9357396286', 'sample@gmail.com', 'sample', 'sample', '', '', '', '', '', '', '', '', '', 1, '2023-10-18 14:09:09');
+(1, 'Sample', 'Sample', '', '9357396286', 'sample@gmail.com', 'sample', 'sample', '', '', '', '', '', '', '', '', '', 1, '2023-10-18 14:09:09'),
+(3, 'Kevin Jay Napoles', 'Roluna', '', '9357396286', 'jeffrybordeos@gmail.com', '123456', '123456', '', '', '', '', '', '', '', '', '', 1, '2023-12-06 06:52:39');
 
 -- --------------------------------------------------------
 
@@ -272,13 +277,13 @@ ALTER TABLE `is_doctors`
 -- AUTO_INCREMENT for table `is_logs`
 --
 ALTER TABLE `is_logs`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `is_patients`
 --
 ALTER TABLE `is_patients`
-  MODIFY `patient_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `patient_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `is_settings`

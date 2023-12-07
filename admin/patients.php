@@ -52,8 +52,38 @@
 											<td class="text-center"><?php echo $val->contact;?></td>
 											<td class="text-center"><?php echo $val->email;?></td>
 											<td class="text-center"><?php echo $val->username;?></td>
-											<td class="text-center"><a href="patient-profile?data=<?php echo $val->patient_id;?>" class="btn btn-sm round btn-outline-info"> View Records</a></td>
+											<td class="text-center">
+											<?php if($val->is_active == 0){?>
+											<a href="#" data-toggle="modal" data-backdrop="false" data-target="#backdrop<?php echo $val->patient_id;?>" class="btn btn-sm round btn-outline-success"> Approve </a>
+											<?php } else { ?>
+											<a href="patient-profile?data=<?php echo $val->patient_id;?>" class="btn btn-sm round btn-outline-info"> View Records</a>
+											<?php } ?>
+											</td>
 										</tr>
+										
+										<div class="modal fade text-left" id="backdrop<?php echo $val->patient_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" style="display: none;" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabel4">Account Approval</h4>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="oewei8">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+													<form method="POST">
+														ARE YOU SURE TO APPROVE THIS ACCOUNT?
+														<input type="hidden" id="companyName" value="<?php echo $val->patient_id;?>" class="form-control" name="id" required>
+													
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" >Close</button>
+														<button type="submit" class="btn btn-outline-primary" name="update-approval">Approve</button>
+													</div>
+												</form>
+												</div>
+											</div>
+										</div>
 									<?php } ?>	
 									</tbody>
 								</table>

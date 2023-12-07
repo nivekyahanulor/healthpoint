@@ -55,7 +55,7 @@
 				// $message = 'failed';
 			// }
 	$mysqli->query("INSERT INTO is_patients (firstname , lastname ,email,contact,username,password,is_active) 
-											VALUES ('$fname','$lname','$email','$contact','$username','$password',1)");
+											VALUES ('$fname','$lname','$email','$contact','$username','$password',0)");
 	
 
 	header("location:../register.php?registered");

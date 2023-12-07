@@ -77,6 +77,35 @@ if(isset($_POST['update-profile'])){
 	
 }
 
+
+
+if(isset($_POST['update-approval'])){
+	
+	
+	$id   = $_POST['id'];
+	
+	$mysqli->query("UPDATE 
+					is_patients set 
+					is_active='1'
+					where patient_id='$id'");
+		
+		
+	 echo '<script>
+			  $(document).ready(function() {
+					Swal.fire({
+							title: "Success! ",
+							text: "Profile Data Successfully Approved",
+							icon: "success",
+							type: "success"
+							}).then(function(){
+								window.location = "patients";
+							});
+							});
+			</script>';
+		
+	
+}
+
 if(isset($_POST['update-profile_1'])){
 	
 	

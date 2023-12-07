@@ -2,10 +2,11 @@
 include('../controller/database.php');
 
 
-
+$dataid = $_SESSION['id'];
 $is_appointments = $mysqli->query("SELECT a.*, b.firstname as p_fname , b.lastname as p_lastname , c.firstname as d_fname , c.lastname as d_lname from is_appointments a
 								   LEFT JOIN is_patients b on b.patient_id  = a.patient_id
 								   LEFT JOIN is_doctors c on c.doctor_id   = a.doctors_id 
+								   where a.patient_id = '$dataid'
 									");
 
 

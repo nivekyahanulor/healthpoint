@@ -26,6 +26,9 @@
 			<li class="nav-item">
 			  <a class="nav-link  <?php if($_GET['data'] == 'declined'){ echo 'active'; } ?>"  href="appointments?data=declined">Declined Appointments</a>
 			</li>
+			<li class="nav-item">
+			  <a class="nav-link  <?php if($_GET['data'] == 'missed'){ echo 'active'; } ?>"  href="appointments?data=missed">Missed Appointments</a>
+			</li>
 		  </ul>
 			<div class="row">
 				<div class="col-12">
@@ -52,7 +55,7 @@
 											<th class="text-center">DOCTORS NAME</th>
 											<th class="text-center">DATE</th>
 											<th class="text-center">TIME</th>
-											<?php if($_GET['data'] != 'declined'){?>
+											<?php if($_GET['data'] != 'declined' && $_GET['data'] != 'missed'){?>
 											<th class="text-center">STATUS</th>
 											<th class="text-center">ACTION</th>
 											<?php } ?>
@@ -67,12 +70,13 @@
 											<td class="text-center">Dr. <?php echo $val->d_fname . ' '. $val->d_lname;?></td>
 											<td class="text-center"><?php echo $val->appointment_date;?></td>
 											<td class="text-center"><?php echo $val->appointment_time;?></td>
-											<?php if($_GET['data'] != 'declined'){?>
+											<?php if($_GET['data'] != 'declined' && $_GET['data'] != 'missed'){?>
 											<td class="text-center"><?php if( $val->status == 0) { echo "Pending";} else { echo '<a href="#" data-toggle="modal" data-backdrop="false" data-target="#results'.$val->appointment_id.'" class="btn round btn-outline-info btn-sm"> <i class="la la-check"></i> View Results </a>';} ?></td>
 											<td class="text-center">
 											<?php  if($val->status == 0){?>
 												<button class="btn btn-sm round btn-outline-info" data-toggle="modal" data-target="#approved<?php echo $val->appointment_id;?>"> Approve </button>
 												<button class="btn btn-sm round btn-outline-warning" data-toggle="modal" data-target="#decline<?php echo $val->appointment_id;?>"> Decline </button>
+												<button class="btn btn-sm round btn-outline-danger" data-toggle="modal" data-target="#missed<?php echo $val->appointment_id;?>"> Missed </button>
 											<?php }  else { echo '<a href="patient-profile?data='.$val->patient_id.'&appointment='.$val->appointment_id.'" class="btn round btn-outline-info btn-sm"> <i class="la la-check"></i> View Patient Record </a>';}?>
 											</td>
 											<?php } ?>
@@ -123,6 +127,34 @@
 													<div class="modal-footer">
 														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" fdprocessedid="pu6p1c">Close</button>
 														<button type="submit" class="btn btn-outline-warning" name="process-declined">Decline</button>
+													</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										
+										
+										<div class="modal fade text-left" id="missed<?php echo $val->appointment_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" style="display: none;" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabel4">Missed Appointment</h4>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="oewei8">
+														<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<form method="POST">
+														<div class="form-group">
+														
+															<b>REASON</b><br>
+													    	<textarea class="form-control" name="reason" ></textarea>
+													    	<input type="hidden" name="appointment_id" value="<?php echo $val->appointment_id;?>">
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" fdprocessedid="pu6p1c">Close</button>
+														<button type="submit" class="btn btn-outline-warning" name="process-missed">Process</button>
 													</div>
 													</form>
 												</div>
