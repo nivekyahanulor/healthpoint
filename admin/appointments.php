@@ -55,6 +55,9 @@
 											<th class="text-center">DOCTORS NAME</th>
 											<th class="text-center">DATE</th>
 											<th class="text-center">TIME</th>
+											<?php if($_GET['data'] == 'missed'){?>
+											<th class="text-center">REASON</th>
+											<?php } ?>
 											<?php if($_GET['data'] != 'declined' && $_GET['data'] != 'missed'){?>
 											<th class="text-center">STATUS</th>
 											<th class="text-center">ACTION</th>
@@ -70,6 +73,9 @@
 											<td class="text-center">Dr. <?php echo $val->d_fname . ' '. $val->d_lname;?></td>
 											<td class="text-center"><?php echo $val->appointment_date;?></td>
 											<td class="text-center"><?php echo $val->appointment_time;?></td>
+											<?php if($_GET['data'] == 'missed'){?>
+											<td class="text-center"><?php echo $val->reason;?></td>
+											<?php } ?>
 											<?php if($_GET['data'] != 'declined' && $_GET['data'] != 'missed'){?>
 											<td class="text-center"><?php if( $val->status == 0) { echo "Pending";} else { echo '<a href="#" data-toggle="modal" data-backdrop="false" data-target="#results'.$val->appointment_id.'" class="btn round btn-outline-info btn-sm"> <i class="la la-check"></i> View Results </a>';} ?></td>
 											<td class="text-center">
