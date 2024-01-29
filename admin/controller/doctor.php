@@ -22,9 +22,50 @@ if(isset($_POST['process'])){
 		$password     = $_POST['password'];
 		$username     = $_POST['username'];
 		$speciality   = $_POST['speciality'];
+		$monday       = $_POST['monday'];
+		$tuesday      = $_POST['tuesday'];
+		$wednesday    = $_POST['wednesday'];
+		$thursday     = $_POST['thursday'];
+		$friday       = $_POST['friday'];
+		$saturday     = $_POST['saturday'];
+		$sunday       = $_POST['sunday'];
+		$times        = $_POST['times'];
+		$timee        = $_POST['timee'];
 		
-		$mysqli->query("INSERT INTO is_doctors		(firstname,lastname,email,contact,password,username,speciality,is_active) 
-								VALUES ('$firstname','$lastname','$email','$contact','$password','$username','$speciality','1')");
+		$mysqli->query("INSERT INTO is_doctors		(firstname,
+													 lastname,
+													 email,
+													 contact,
+													 password,
+													 username,
+													 speciality,
+													 monday,
+													 tuesday,
+													 wednesday,
+													 thursday,
+													 friday,
+													 saturday,
+													 sunday,
+													 times,
+													 timee,
+													 is_active) 
+										VALUES      ('$firstname',
+													 '$lastname',
+													 '$email',
+													 '$contact',
+													 '$password',
+													 '$username',
+													 '$speciality',
+													 '$monday',
+													 '$tuesday',
+													 '$wednesday',
+													 '$thursday',
+													 '$friday',
+													 '$saturday',
+													 '$sunday',
+													 '$times',
+													 '$timee',
+													 '1')");
 								
 		$mysqli->query("INSERT INTO is_logs		(name,logs) 
 								VALUES ('$aname','Add New Doctor')");								

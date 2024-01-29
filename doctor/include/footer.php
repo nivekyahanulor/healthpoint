@@ -38,7 +38,99 @@
     <script src="../assets/js/datatables.min.js"></script>
 	<script src="../assets/sweetalert2/sweetalert2.all.min.js" ></script>
     <script src="../assets/js/dashboard-crypto.min.js"></script>
+		 <script>
+    var link = 'http://localhost/healthpoint/';
+	$('#doctor_id').on('change', function() {
+		
+	    var id = this.value;
+		$.ajax({
+			   type: "POST",
+			   dataType: "json",
+			   url:link+'/controller/get-doc-time.php',
+			   data : {
+					 'id'         : id, 
+				},
+			   success: function(data)
+			   {
+				
+				 
+				 if(data.monday == 0){
+						var monday = 1;
+				 } else {
+						var monday = "";
+				 } if(data.tuesday == 0){
+						var tuesday = 2;
+				 } else {
+						var tuesday = "";
+				 } if(data.wednesday == 0){
+						var wednesday = 3;
+				 } else {
+						var wednesday = "";
+				 } if(data.thursday == 0){
+						var thursday = 4;
+				 } else {
+						var thursday = "";
+				 } if(data.friday == 0){
+						var friday = 5;
+				 } else {
+						var friday = "";
+				 }if(data.saturday == 0){
+						var saturday = 6;
+				 } else {
+						var saturday = "";
+				 }if(data.sunday == 0){
+						var sunday = 0;
+				 } else {
+						var sunday = "";
+				 }
+				 
+				 if(data.monday == 1){
+						var monday1 = "Monday,";
+				 } else {
+						var monday1 = "";
+				 } if(data.tuesday == 0){
+						var tuesday1 = "Tuesday,";
+				 } else {
+						var tuesday1 = "";
+				 } if(data.wednesday == 0){
+						var wednesday1 = "Wednesday,";
+				 } else {
+						var wednesday1 = "";
+				 } if(data.thursday1 == 0){
+						var thursday1 = "Thursday,";
+				 } else {
+						var thursday1 = "";
+				 } if(data.friday == 0){
+						var friday1 = "Friday,";
+				 } else {
+						var friday1 = "";
+				 }if(data.saturday == 0){
+						var saturday1 = "Saturday,";
+				 } else {
+						var saturday1 = "";
+				 }if(data.sunday == 0){
+						var sunday1 = "Sunday,";
+				 } else {
+						var sunday1 = "";
+				 }
+				 
+				  $("#dc-res").show(); 
+			   $("#dc-res").html("<br> <b> Doctor Schedule: </b> <br> Time : " + data.time +  "<br> Available Day : " + monday1 + tuesday1 + wednesday1 + thursday1 + friday1 + saturday1 + sunday1); 
+				 const picker = document.getElementById('date_appointment');
+					picker.addEventListener('input', function(e){
+					  var day = new Date(this.value).getUTCDay();
+					  if([monday,tuesday,wednesday,thursday,friday,saturday,sunday].includes(day)){
+						e.preventDefault();
+						this.value = '';
+						alert('This Day is not allowed ! Doctor is unavailable!');
+					  }
+				});
+			   }
+		 });
+	});  
 	
+	
+  </script>
 	<script>
 var link = 'http://localhost/healthpoint/';
 

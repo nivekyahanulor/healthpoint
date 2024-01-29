@@ -60,6 +60,8 @@
             $logs = 'active';
         }else if ($page == 'reports' ) {
             $reports = 'active';
+        }else if ($page == 'speciality' ) {
+            $speciality = 'active';
         }
 	?>
     <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
@@ -67,6 +69,7 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
           <li class=" nav-item <?php echo $dashboard;?>"><a href="dashboard"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a> </li>
           <li class=" nav-item <?php echo $doctors;?>"><a href="doctors"><i class="la la-user"></i><span class="menu-title" data-i18n="Templates">Doctors</span></a></li>
+          <li class=" nav-item <?php echo $speciality;?>"><a href="speciality"><i class="la la-check"></i><span class="menu-title" data-i18n="Templates">Speciality</span></a></li>
           <li class=" nav-item <?php echo $patients;?>"><a href="patients"><i class="la la-users"></i><span class="menu-title" data-i18n="eCommerce"> Patients</span></a></li>
           <li class=" nav-item <?php echo $appointments;?>"><a href="appointments?data=pending"><i class="la la-clipboard"></i><span class="menu-title" data-i18n="eCommerce"> Appointments</span></a></li>
           <li class=" nav-item <?php echo $admins;?>"><a href="admins"><i class="la la-users"></i><span class="menu-title" data-i18n="eCommerce">  Administrators</span></a></li>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2023 at 12:12 PM
+-- Generation Time: Jan 29, 2024 at 07:25 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -49,7 +49,8 @@ INSERT INTO `is_appointments` (`appointment_id`, `patient_id`, `doctors_id`, `ap
 (1, 1, 1, '10:00 AM', '2023-10-19', 2, '', '', '', '', '2023-10-20 11:15:59'),
 (2, 1, 1, '11:30 AM', '2023-10-19', 2, '11', '1', '1', '', '2023-10-20 12:54:29'),
 (3, 1, 1, '10:00 AM', '2023-11-29', 1, '', '', '', '', '2023-11-29 13:13:11'),
-(4, 1, 1, '11:00 AM', '2023-11-29', 4, '', '', '', 'sdaasd', '2023-11-29 13:48:03');
+(4, 1, 1, '11:00 AM', '2023-11-29', 4, '', '', '', 'sdaasd', '2023-11-29 13:48:03'),
+(5, 1, 1, '11:00 AM', '2024-01-25', 4, '', '', '', '123456', '2024-01-25 22:21:12');
 
 -- --------------------------------------------------------
 
@@ -67,6 +68,15 @@ CREATE TABLE `is_doctors` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `speciality` text NOT NULL,
+  `monday` int(11) NOT NULL,
+  `tuesday` int(11) NOT NULL,
+  `wednesday` int(11) NOT NULL,
+  `thursday` int(11) NOT NULL,
+  `friday` int(11) NOT NULL,
+  `saturday` int(11) NOT NULL,
+  `sunday` int(11) NOT NULL,
+  `times` varchar(50) NOT NULL,
+  `timee` varchar(50) NOT NULL,
   `is_active` int(1) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -75,9 +85,10 @@ CREATE TABLE `is_doctors` (
 -- Dumping data for table `is_doctors`
 --
 
-INSERT INTO `is_doctors` (`doctor_id`, `firstname`, `lastname`, `address`, `contact`, `email`, `username`, `password`, `speciality`, `is_active`, `date_added`) VALUES
-(1, 'Kevin', 'Roluna', '', '09357396276', '', 'test123', 'test123', 'Wala', 1, '2023-10-18 15:20:45'),
-(2, 'sadasd', 'asdasd', '', '', '', 'ss', 'ss', 'ss', 0, '2023-10-20 06:58:34');
+INSERT INTO `is_doctors` (`doctor_id`, `firstname`, `lastname`, `address`, `contact`, `email`, `username`, `password`, `speciality`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `times`, `timee`, `is_active`, `date_added`) VALUES
+(1, 'Kevin', 'Roluna', '', '09357396276', '', 'test123', 'test123', 'Wala', 0, 0, 0, 0, 0, 0, 0, '', '', 1, '2023-10-18 15:20:45'),
+(2, 'sadasd', 'asdasd', '', '', '', 'ss', 'ss', 'ss', 0, 0, 0, 0, 0, 0, 0, '', '', 0, '2023-10-20 06:58:34'),
+(3, 'test', 'test', '', 'test', 'test@gmail.com', 'test', 'test', 'test', 1, 1, 1, 0, 0, 0, 0, '4:00 PM', '5:00 PM', 1, '2024-01-25 15:42:15');
 
 -- --------------------------------------------------------
 
@@ -131,7 +142,15 @@ INSERT INTO `is_logs` (`id`, `name`, `logs`, `patient_id`, `doc_id`, `date_added
 (30, 'Kevin Roluna', 'Add New Appointment', '', '1', '2023-11-29 13:48:03'),
 (31, 'health point', 'Approved Appointment', '', '', '2023-12-07 17:55:48'),
 (32, 'health point', 'Process Missed Appointment', '', '', '2023-12-07 19:01:05'),
-(33, 'health point', 'Process Missed Appointment', '', '', '2023-12-07 19:01:41');
+(33, 'health point', 'Process Missed Appointment', '', '', '2023-12-07 19:01:41'),
+(34, 'health point', 'Add New Appointment', '', '', '2024-01-25 22:21:12'),
+(35, 'health point', 'Process Missed Appointment', '', '', '2024-01-25 22:28:25'),
+(36, 'Admin Admin', 'Add New Doctor', '', '', '2024-01-25 23:42:15'),
+(37, 'health point', 'Added New Speciality', '', '', '2024-01-29 13:09:26'),
+(38, 'health point', 'Update Speciality Details', '', '', '2024-01-29 13:36:03'),
+(39, 'health point', 'Update Speciality Details', '', '', '2024-01-29 13:36:21'),
+(40, 'health point', 'Delete Speciality Details', '', '', '2024-01-29 13:36:36'),
+(41, 'health point', 'Added New Speciality', '', '', '2024-01-29 13:36:41');
 
 -- --------------------------------------------------------
 
@@ -198,6 +217,25 @@ INSERT INTO `is_settings` (`id`, `title`, `email`, `contact`, `address`, `facebo
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `is_speciality`
+--
+
+CREATE TABLE `is_speciality` (
+  `id` int(12) NOT NULL,
+  `speciality` text NOT NULL,
+  `date_added` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `is_speciality`
+--
+
+INSERT INTO `is_speciality` (`id`, `speciality`, `date_added`) VALUES
+(2, 'test1', '2024-01-29 05:36:41');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `is_users`
 --
 
@@ -252,6 +290,12 @@ ALTER TABLE `is_settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `is_speciality`
+--
+ALTER TABLE `is_speciality`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `is_users`
 --
 ALTER TABLE `is_users`
@@ -265,19 +309,19 @@ ALTER TABLE `is_users`
 -- AUTO_INCREMENT for table `is_appointments`
 --
 ALTER TABLE `is_appointments`
-  MODIFY `appointment_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `appointment_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `is_doctors`
 --
 ALTER TABLE `is_doctors`
-  MODIFY `doctor_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `doctor_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `is_logs`
 --
 ALTER TABLE `is_logs`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `is_patients`
@@ -290,6 +334,12 @@ ALTER TABLE `is_patients`
 --
 ALTER TABLE `is_settings`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `is_speciality`
+--
+ALTER TABLE `is_speciality`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `is_users`

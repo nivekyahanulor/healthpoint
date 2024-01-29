@@ -135,19 +135,20 @@
 		
 			<div class="form-group">
 				<label for="companyName">Doctors Name: </label>
-				<select  class="form-control" name="doctor_id" id="doctor_id" required>
+				<select  class="form-control" name="doctor_id" id="doctor_id"  required>
 					<option value=""> - Select Doctor - </option>
 						<?php
 						$is_doctors = $mysqli->query("SELECT * from is_doctors");
 						while($val = $is_doctors->fetch_object()){
 					?>
-						<option value="<?php echo $val->doctor_id;?>"> Dr. <?php echo $val->firstname . ' '.  $val->lastname;?> </option>
+						<option value="<?php echo $val->doctor_id;?>"> Dr. <?php echo $val->firstname . ' '.  $val->lastname .' - '. $val->speciality;?> </option>
 					<?php } ?>
 				</select>
+				<div id="dc-res"> </div>
 			</div>
 			<div class="form-group">
 				<label for="companyName">Date: </label>
-				<input type="date" class="form-control"  name="a_date" id="date_appointment" min='<?php echo date('Y-m-d', strtotime( date('Y-m-d')));?>' required>
+				<input type="date" class="form-control"  name="a_date" id="date_appointment" min='<?php echo date('Y-m-d');?>' required>
 			</div>
 			<div class="form-group">
 				<label for="companyName">Time: </label>

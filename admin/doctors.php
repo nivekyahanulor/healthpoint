@@ -95,7 +95,14 @@
 			</div>
 			<div class="form-group">
 				<label for="companyName">Speciality: </label>
-				<input type="text" id="companyName" class="form-control" placeholder="Enter Speciality" name="speciality" required>
+				<select type="text" id="companyName" class="form-control" placeholder="Enter Speciality" name="speciality" required>
+					<option value=""> - Select Speciality - </option>
+					<?php $is_speciality = $mysqli->query("SELECT * from is_speciality"); 
+						 while($val = $is_speciality->fetch_object()){ 
+					?>
+						<option value="<?php echo $val->speciality;?>"> <?php echo $val->speciality;?> </option>
+					<?php } ?>
+				</select>
 			</div>
 			<div class="form-group">
 				<label for="companyName">Mobile Number: </label>
@@ -109,7 +116,53 @@
 				<label for="companyName">Password: </label>
 				<input type="password" id="companyName" class="form-control" placeholder="Enter Password" name="password" required>
 			</div>
+			
+			<div class="form-group">
+						  <label for="inputName5" class="form-label">Time Start : </label>
+						  <select type="time" class="form-control" name="times" required>
+								<option value=""> - Select Time -</option>
+								<option> 8:00 AM</option>
+								<option> 9:00 AM</option>
+								<option> 10:00 AM</option>
+								<option> 11:00 AM</option> 
+								<option> 1:00 PM</option>
+								<option> 2:00 PM</option>
+								<option> 3:00 PM</option>
+								<option> 4:00 PM</option>
+								<option> 5:00 PM</option>
+								<option> 6:00 PM</option>
+								<option> 7:00 PM</option>
+						  </select>
+						</div>
+			<div class="form-group">
+						  <label for="inputName5" class="form-label">Time End : </label>
+						 <select type="time" class="form-control" name="timee" required>
+								<option value=""> - Select Time -</option>
+								<option> 8:00 AM</option>
+								<option> 9:00 AM</option>
+								<option> 10:00 AM</option>
+								<option> 11:00 AM</option> 
+								<option> 1:00 PM</option>
+								<option> 2:00 PM</option>
+								<option> 3:00 PM</option>
+								<option> 4:00 PM</option>
+								<option> 5:00 PM</option>
+								<option> 6:00 PM</option>
+								<option> 7:00 PM</option>
+						  </select>
+						</div>
+			<div class="form-group">
+							  <label for="inputName5" class="form-label">Schedule Day : </label><br>
+							  <input type="checkbox" class="" name="monday" value="1"> Monday<br>
+							  <input type="checkbox" class="" name="tuesday" value="1"> Tuesday<br>
+							  <input type="checkbox" class="" name="wednesday" value="1"> Wednesday<br>
+							  <input type="checkbox" class="" name="thursday" value="1"> Thursday<br>
+							  <input type="checkbox" class="" name="friday" value="1"> Friday<br>
+							  <input type="checkbox" class="" name="saturday" value="1"> Saturday<br>
+							  <input type="checkbox" class="" name="sunday" value="1"> Sunday <br>
+						</div>
 			</div>
+			
 			<div class="modal-footer">
 				<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" >Close</button>
 				<button type="submit" class="btn btn-outline-primary" name="process">Process</button>
